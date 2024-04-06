@@ -1,6 +1,4 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
-// 開発用の仮置きのトークン（デプロイ時にHeroku環境変数を読むように書き換えること
-const { token } = require('./config.json');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const prefix = '!';
 
@@ -23,4 +21,4 @@ client.on('messageCreate', async message => {
 });
 
 
-client.login(token);
+client.login(process.env.DISCORD_TOKEN);
