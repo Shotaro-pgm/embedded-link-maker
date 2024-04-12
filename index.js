@@ -15,7 +15,7 @@ client.on('messageCreate', async message => {
         const [text, link] = args.map(str => str);
         console.log(text);
         console.log(link);
-        let embText = '[' + text + ']' + '(' + link +')';
+        let embText = '[' + text + ']' + '(<' + link +'>)';
         message.channel.send(embText);
     }
 });
