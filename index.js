@@ -13,8 +13,6 @@ client.on('messageCreate', async message => {
     if(command === 'embed'){
         // ここにマークダウン[]()にする処理を書く
         const [text, link, previewFlag] = args.map(str => str);
-        console.log(text);
-        console.log(link);
 
         if (previewFlag === 't'){
             let embText = '[' + text + ']' + '(' + link +')';
@@ -23,6 +21,14 @@ client.on('messageCreate', async message => {
             let embText = '[' + text + ']' + '(<' + link +'>)';
             message.channel.send(embText);
         }
+
+        // コマンド自動削除の処理ロジック
+        // 直近5件のメッセージを取得する
+        let searchedText = message.channel.messages.fetch({ before: '1', limit: 1});
+        message.channel.send('result : ' + searchedText)
+        // !embedから始まるメッセージがあるかを判定する（ループ）
+            // !embedから始まるメッセージを配列に格納する
+            // 配列に格納したメッセージを削除する（ループ）
         
     }
 });
