@@ -1,6 +1,7 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const prefix = '!';
+const { token } = require('./config.json');
 
 client.once(Events.ClientReady, c => {
     console.log('ログインしました。');
@@ -12,13 +13,24 @@ client.on('messageCreate', async message => {
     const [command, ...args] = message.content.slice(prefix.length).split(/\s+/);
     if(command === 'embed'){
         // ここにマークダウン[]()にする処理を書く
-        const [text, link] = args.map(str => str);
+        const [text, link, previewFlag] = args.map(str => str);
         console.log(text);
         console.log(link);
-        let embText = '[' + text + ']' + '(<' + link +'>)';
-        message.channel.send(embText);
+
+        if (previewFlag === 't'){
+            let embText = '[' + text + ']' + '(' + link +')';
+            message.channel.send(embText);
+        } else {
+            let embText = '[' + text + ']' + '(<' + link +'>)';
+            message.channel.send(embText);
+        }
+        
     }
 });
 
-
-client.login(process.env.DISCORD_TOKEN);
+//ログインフローの切り分け
+if(!process.env.DISCORD_TOKEN){
+    client.login(token);
+} else {
+    client.login(process.env.DISCORD_TOKEN);
+};
