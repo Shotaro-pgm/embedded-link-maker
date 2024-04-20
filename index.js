@@ -1,7 +1,6 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const prefix = '!';
-const { token } = require('./config.json');
 
 client.once(Events.ClientReady, c => {
     console.log('ログインしました。');
@@ -30,6 +29,7 @@ client.on('messageCreate', async message => {
 
 //ログインフローの切り分け
 if(!process.env.DISCORD_TOKEN){
+    const { token } = require('./config.json');
     client.login(token);
 } else {
     client.login(process.env.DISCORD_TOKEN);
