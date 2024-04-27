@@ -26,13 +26,14 @@ client.on('messageCreate', (message) => __awaiter(void 0, void 0, void 0, functi
         return;
     const [command, ...args] = message.content.slice(prefix.length).split(/\s+/);
     if (command === 'embed') {
+        let embText;
         const [text, link, previewFlag] = args.map(str => str);
         if (previewFlag === 't') {
-            let embText = '[' + text + ']' + '(' + link + ')';
+            embText = '[' + text + ']' + '(' + link + ')';
             message.channel.send(embText);
         }
         else {
-            let embText = '[' + text + ']' + '(<' + link + '>)';
+            embText = '[' + text + ']' + '(<' + link + '>)';
             message.channel.send(embText);
         }
     }
