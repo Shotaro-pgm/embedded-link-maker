@@ -13,8 +13,6 @@ client.on('messageCreate', async message => {
     if(command === 'embed'){
         // ここにマークダウン[]()にする処理を書く
         const [text, link, previewFlag] = args.map(str => str);
-        console.log(text);
-        console.log(link);
 
         if (previewFlag === 't'){
             let embText = '[' + text + ']' + '(' + link +')';
