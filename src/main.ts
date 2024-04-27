@@ -17,13 +17,14 @@ client.on('messageCreate', async message => {
 
     const [command, ...args] = message.content.slice(prefix.length).split(/\s+/);
     if(command === 'embed'){
+        let embText: string
         const [text, link, previewFlag] = args.map(str => str);
 
         if(previewFlag === 't'){
-            let embText = '[' + text + ']' + '(' + link +')';
+            embText = '[' + text + ']' + '(' + link +')';
             message.channel.send(embText);
         } else {
-            let embText = '[' + text + ']' + '(<' + link +'>)';
+            embText = '[' + text + ']' + '(<' + link +'>)';
             message.channel.send(embText);
         }
     }
